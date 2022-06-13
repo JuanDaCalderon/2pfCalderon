@@ -2,40 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { alumnosOutput, alumnosApi } from '../other/users';
+import { clases } from '../other/clases';
+import { alumnosApi } from '../other/users';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlumnosService {
+export class ClasesService {
   constructor(private http: HttpClient) { }
-  getAlumnos() {
-    return this.http.get <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos')
+
+  getClases() {
+    return this.http.get<clases>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/cursos/1/clase')
       .pipe(
         map(data => {
-          let alumnos: alumnosOutput[] = [];
-          for (const id in data) {
-            let alumno: alumnosOutput;
-            alumno = {
-              id: data[id].id,
-              nombre: data[id].firstName + " " + data[id].middleName + " " + data[id].lastName,
-              curso: data[id].curso,
-              clases: data[id].clases,
-              avatar: data[id].avatar
-            };
-            alumnos.push(alumno);
-          }
-          return alumnos
+          return data
         }),
         catchError(err => {
           let message: string;
-          message = 'Error intentando traer los alumnos, intenta más tarde'
+          message = 'Error intentando traer las clases, intenta más tarde'
           return throwError(() => message);
         })
       )
   }
 
-  postAlumno(alumno: { firstName: string, middleName: string, lastName: string, curso: number }) {
+  /* postClases(alumno: { firstName: string, middleName: string, lastName: string, curso: number }) {
     return this.http.post <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos', alumno)
       .pipe(
         map(data => {
@@ -47,9 +37,9 @@ export class AlumnosService {
           return throwError(() => message);
         })
       )
-  }
+  } */
 
-  editAlumno(alumno: { firstName: string, middleName: string, lastName: string, curso: number }, id: string) {
+  /* editClases(alumno: { firstName: string, middleName: string, lastName: string, curso: number }, id: string) {
     return this.http.put <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos/'+id, alumno)
       .pipe(
         map(data => {
@@ -61,10 +51,9 @@ export class AlumnosService {
           return throwError(() => message);
         })
       )
-  }
+  } */
 
-  deleteAlumno(alumnos: alumnosOutput) {
-    console.log(alumnos);
+  /* deleteClases(alumnos: alumnosOutput) {
     return this.http.delete <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos/'+ alumnos.id)
       .pipe(
         map(data => {
@@ -76,5 +65,5 @@ export class AlumnosService {
           return throwError(() => message);
         })
       )
-  }
+  } */
 }
