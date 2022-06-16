@@ -4,6 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { alumnosOutput } from 'src/app/other/users';
 
+import { AddCursoModalComponent } from '../modals/add-curso-modal/add-curso-modal.component';
+import { EditCursoModalComponent } from '../modals/edit-curso-modal/edit-curso-modal.component';
+import { DeleteCursoModalComponent } from '../modals/delete-curso-modal/delete-curso-modal.component';
+
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -75,10 +79,10 @@ export class CursosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openAddDialog() {
-    /* this.dialog.open(AddAlumnoModalComponent, {
+    this.dialog.open(AddCursoModalComponent, {
       width: '600px',
       data: this.dialog,
-    }); */
+    });
   }
 
   openEditDialog() {

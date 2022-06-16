@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { alumnosOutput } from 'src/app/other/users';
 
-import { AddAlumnoModalComponent } from '../add-alumno-modal/add-alumno-modal.component';
-import { EditAlumnoModalComponent } from '../edit-alumno-modal/edit-alumno-modal.component';
-import { DeleteAlumnoModalComponent } from '../delete-alumno-modal/delete-alumno-modal.component';
+import { AddAlumnoModalComponent } from '../modals/add-alumno-modal/add-alumno-modal.component';
+import { EditAlumnoModalComponent } from '../modals/edit-alumno-modal/edit-alumno-modal.component';
+import { DeleteAlumnoModalComponent } from '../modals/delete-alumno-modal/delete-alumno-modal.component';
 
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AlumnosService } from 'src/app/services/alumnos.service';
