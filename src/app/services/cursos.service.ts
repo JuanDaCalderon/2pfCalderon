@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { clases } from '../other/clases';
 import { cursos } from '../other/cursos';
 import { alumnosApi } from '../other/users';
 
@@ -36,46 +37,71 @@ export class CursosService {
       )
   }
 
-  /* postCurso(alumno: { firstName: string, middleName: string, lastName: string, curso: number }) {
-    return this.http.post <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos', alumno)
+  postCurso(curso: cursos) {
+    let cursoMaped:object;
+    if (!curso.clases) {
+      cursoMaped = {
+        curso: curso.curso
+      };
+    }
+    else{
+      if (curso.clases.length <= 0) {
+        cursoMaped = {
+          curso: curso.curso
+        };
+      }
+      else {
+        cursoMaped = curso;
+      }
+    }
+    return this.http.post <cursos>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/cursos', cursoMaped)
       .pipe(
         map(data => {
           return data
         }),
         catchError(err => {
           let message: string;
-          message = 'Error intentando agregar el alumno, intenta más tarde'
+          message = 'Error intentando agregar el curso, intenta más tarde'
           return throwError(() => message);
         })
       )
-  } */
+  }
 
-  /* editCurso(alumno: { firstName: string, middleName: string, lastName: string, curso: number }, id: string) {
-    return this.http.put <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos/'+id, alumno)
+  editCurso(curso: { curso: string, clases: clases[] }, id: string) {
+    let cursoMaped:object;
+    if (curso.clases.length <= 0) {
+      cursoMaped = {
+        curso: curso.curso
+      };
+    }
+    else {
+      cursoMaped = curso;
+    }
+    return this.http.put <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/cursos/'+id, cursoMaped)
       .pipe(
         map(data => {
           return data
         }),
         catchError(err => {
           let message: string;
-          message = 'Error intentando modificar el alumno, intenta más tarde'
+          message = 'Error intentando modificar el curso, intenta más tarde'
           return throwError(() => message);
         })
       )
-  } */
+  }
 
-  /* deleteCurso(alumnos: alumnosOutput) {
-    return this.http.delete <alumnosApi>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/alumnos/'+ alumnos.id)
+  deleteCurso(curso: cursos) {
+    return this.http.delete <cursos>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/cursos/'+ curso.id)
       .pipe(
         map(data => {
           return data
         }),
         catchError(err => {
           let message: string;
-          message = 'Error intentando eliminar el alumno, intenta más tarde'
+          message = 'Error intentando eliminar el curso, intenta más tarde'
           return throwError(() => message);
         })
       )
-  } */
+  }
 
 }

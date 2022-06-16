@@ -120,6 +120,7 @@ export class AlumnosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   refrescarAlumnos() {
+    this.selection.clear();
     this.isLoadingResults = true;
     this.data = [];
     this.getAlumnosData();

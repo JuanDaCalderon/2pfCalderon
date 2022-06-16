@@ -54,7 +54,9 @@ export class AddAlumnoModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.postAlumnoSub.unsubscribe();
+    if (this.postAlumnoSub) {
+      this.postAlumnoSub.unsubscribe();
+    }
   }
 
 }

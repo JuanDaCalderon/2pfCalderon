@@ -62,7 +62,9 @@ export class EditAlumnoModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.editAlumnoSub.unsubscribe();
+    if (this.editAlumnoSub) {
+      this.editAlumnoSub.unsubscribe();
+    }
   }
 
 }

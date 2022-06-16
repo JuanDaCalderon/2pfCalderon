@@ -37,7 +37,6 @@ export class CursosComponent implements OnInit, AfterViewInit, OnDestroy {
       this.data = response;
       this.dataSource.data = response;
       this.isLoadingResults = false;
-      console.log(response);
     })
   }
 
@@ -86,50 +85,47 @@ export class CursosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openEditDialog() {
-    /* let alumnoEdit = null;
+    let cursoEdit = null;
     if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       let message: string;
-      (this.selection.selected.length === 0) ? message = 'No has seleccionado ningún alumno': message = 'Solo puedes editar un unico alumno';
+      (this.selection.selected.length === 0) ? message = 'No has seleccionado ningún curso': message = 'Solo puedes editar un unico curso';
       this.toastr.error(message);
     }
     else {
       if (this.selection.selected[0] !== undefined && this.selection.selected[0] !== null) {
-        let fullName = this.selection.selected[0].nombre.split(' ');
-        alumnoEdit = {
+        cursoEdit = {
           id: this.selection.selected[0].id,
-          firstName: fullName[0],
-          middleName: fullName[1],
-          lastName: fullName[2],
           curso: this.selection.selected[0].curso,
+          clases: this.selection.selected[0].clases
         }
       }
-      this.dialog.open(EditAlumnoModalComponent, {
+      this.dialog.open(EditCursoModalComponent, {
         width: '600px',
-        data: { dialog: this.dialog, alumnos: alumnoEdit },
+        data: { dialog: this.dialog, curso: cursoEdit },
       });
-    } */
+    }
   }
 
   openDeleteDialog() {
-    /* if (this.selection.selected.length === 0) {
-      let message: string = 'No has seleccionado ningún alumno';
+    if (this.selection.selected.length === 0) {
+      let message: string = 'No has seleccionado ningún curso';
       this.toastr.error(message);
     }
     else {
-      this.dialog.open(DeleteAlumnoModalComponent, {
+      this.dialog.open(DeleteCursoModalComponent, {
         width: '400px',
-        data: {dialog: this.dialog, alumnos: this.selection.selected},
+        data: { dialog: this.dialog, cursos: this.selection.selected },
       });
-    } */
+    }
   }
 
   refrescarCursos() {
+    this.selection.clear();
     this.isLoadingResults = true;
     this.data = [];
     this.getCursosData();
     this.cursosTable.renderRows();
     this.toastr.success('Cursos actualizados Correctamente');
-    console.log(this.dataSource.data);
   }
 
   ngOnDestroy(): void {

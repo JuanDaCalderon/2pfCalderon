@@ -13,7 +13,7 @@ export class DeleteAlumnoModalComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isSelected: boolean = false;
   bodyCopy: string = 'Selecciona el alumno que quieres eliminar';
-  deleteAlumno:Subscription;
+  deleteAlumnoSub:Subscription;
   constructor(
     public dialogRef: MatDialogRef<DeleteAlumnoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {dialog:MatDialog, alumnos: alumnosOutput []},
@@ -33,7 +33,7 @@ export class DeleteAlumnoModalComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isLoading = true;
     for (const index in this.data.alumnos) {
-      this.deleteAlumno = this.alumnoService.deleteAlumno(this.data.alumnos[index])
+      this.deleteAlumnoSub = this.alumnoService.deleteAlumno(this.data.alumnos[index])
         .subscribe({
           next: (response) => {
             console.log(response);
@@ -53,7 +53,9 @@ export class DeleteAlumnoModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.deleteAlumno.unsubscribe();
+    if (this.deleteAlumnoSub) {
+      this.deleteAlumnoSub.unsubscribe();
+    }
   }
 
 }
