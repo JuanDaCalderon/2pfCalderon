@@ -15,7 +15,19 @@ export class ClasesService {
     return this.http.get<clases>('https://629415d0089f87a57ac8f2a2.mockapi.io/api/v1/cursos/1/clase')
       .pipe(
         map(data => {
-          return data
+          let clases: clases[] = [];
+          for (const id in data) {
+            let clase: clases;
+            clase = {
+              clase: data[id].clase,
+              id: data[id].id,
+              profesor: data[id].profesor,
+              cursoId: data[id].cursoId,
+              alumnos: data[id].alumnos
+            };
+            clases.push(clase);
+          }
+          return clases
         }),
         catchError(err => {
           let message: string;
